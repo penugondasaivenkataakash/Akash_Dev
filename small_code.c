@@ -2,11 +2,13 @@
 
 int main()
 {
-int a,b,c;
-a = 20;
+int a,b,c,d;
+a = 20
 b = 40;
-c = a+b;
-printf("%d",c);
+c = 50;
+d = a+b+c;
+
+printf("%d",d);
 
 return 0;
 }
