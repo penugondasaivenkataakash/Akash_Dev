@@ -1,1 +1,19 @@
-NEWFILE
+pipeline{
+	agent any
+	options{
+		timeout(time: 2,unit: 'SECONDS')
+	}
+
+	stages{
+		stage('Execution1'){
+			steps{
+				echo 'Hello World'
+			}
+		}
+		stage('Execution2'){
+			steps{
+				echo 'I am Executing the Build for the 2nd Process'
+			}
+		}
+	}
+}
