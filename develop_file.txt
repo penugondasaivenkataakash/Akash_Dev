@@ -15,5 +15,10 @@ pipeline{
 				echo 'I am Executing the Build for the 2nd Process'
 			}
 		}
+		stage('Execution3'){
+			steps{
+				echo 'I am executing the build for the 3rd Process'
+			}
+		}
 	}
 }
