@@ -1,29 +1,59 @@
-pipeline{
-	agent any
-	options{
-		timeout(time: 2,unit: 'SECONDS')
-	}
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'YOUR_NAME', description: 'Your Name', defaultValue: 'YourName')
+    }
 
-	stages{
-		stage('Execution1'){
-			steps{
-				echo 'Hello World'
-			}
-		}
-		stage('Execution2'){
-			steps{
-				echo 'I am Executing the Build for the 2nd Process'
-			}
-		}
-		stage('Execution3'){
-			steps{
-				echo 'I am Executing the Build for the 3rd Process'
-			}
-		}
-		stage('Execution4'){
-			steps{
-				echo 'I am Executing the Build for the 4th Process'
-			}
-		}
-	}
+    stages {
+        stage('Stage 1') {
+            steps {
+                script {
+                    echo "This is Stage 1"
+                }
+            }
+        }
+        stage('Stage 2') {
+            steps {
+                script {
+                    echo "This is Stage 2"
+                }
+            }
+        }
+        stage('Stage 3') {
+            parallel {
+                stage('Parallel Stage 1') {
+                    steps {
+                        script {
+                            echo "This is Parallel Stage 1"
+                        }
+                    }
+                }
+                stage('Parallel Stage 2') {
+                    steps {
+                        script {
+                            echo "This is Parallel Stage 2"
+                        }
+                    }
+                }
+            }
+        }
+        stage('Stage 4') {
+            steps {
+                script {
+                    def name = params.YOUR_NAME
+                    echo "This is Stage 4. Your Name is: ${name}"
+                }
+            }
+        }
+    }
+    
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+                error("Manually failing the build")
+            }
+        }
+    }
 }
