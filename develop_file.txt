@@ -17,7 +17,15 @@ pipeline{
 		}
 		stage('Execution3'){
 			steps{
+ 
 				echo 'I am executing the build for the 3rd Process'
+
+			}
+		}
+		stage('Execution4'){
+			steps{
+				echo 'I am Executing the Build for the 4th Process'
+
 			}
 		}
 	}
